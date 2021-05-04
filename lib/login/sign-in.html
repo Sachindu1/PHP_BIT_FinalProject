@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Sign In | Bootstrap Based Admin Template - Material Design</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+   <link href="../../css/web_ref.css" rel="stylesheet" type="text/css">
+    <link href="../../css/web_ref2.css" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Sweetalert Css -->
+    <link href="../../plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
+
+    <!-- Custom Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+    <style type="text/css">
+        html{
+            background-image: url("../../images/Brand-Acquisition-Retention.png");
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    .login-page{
+        background-color: rgba(0,0,0,0.5) !important;
+    }
+        .card{
+            background-color: rgba(0,0,0,0.3) !important;
+        }
+        .card .body {
+            font-size: 14px;
+            color: #f9f0f0;
+            padding: 20px;
+        }
+        .login-page .login-box .msg {
+            color: #fff7f7;
+        }
+
+        .input-group .input-group-addon .material-icons {
+
+            color: #fff5f5;
+        }
+        [type="checkbox"].filled-in:not(:checked) + label:after {
+            background-color: transparent;
+            border: 2px solid #fff9f9;
+        }
+    </style>
+</head>
+
+<body class="login-page">
+
+    <div class="login-box">
+        <div class="logo">
+            <a href="javascript:void(0);">ES0FT <b>VirtualHR</b></a>
+            <small>Your job made easy</small>
+        </div>
+        <div class="card">
+            <div class="body">
+                <!--<form id="frm_signIn" method="POST" action="log_process.php?ftype=log_user">-->
+                <form id="frm_signIn" method="post" action="">
+                    <div class="msg">Sign in to start your session</div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                           <i class="material-icons">email</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="email" class="form-control" name="email" placeholder=" E mail" required autofocus>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" name="password" placeholder=" Password" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8 p-t-5">
+                            <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-indigo">
+                            <label for="rememberme">Remember Me</label>
+                        </div>
+                        <div class="col-xs-4">
+                            <button class="btn btn-block bg-indigo waves-effect" type="submit" name="btn_signin" onclick="userLog()">SIGN IN</button>
+                        </div>
+                    </div>
+                    <div class="row m-t-15 m-b--20">
+                        <div class="col-xs-6">
+                            <a href="sign-up.html">Register Now!</a>
+                        </div>
+                        <div class="col-xs-6 align-right">
+                            <a href="forgot-password.html">Forgot Password?</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery Core Js -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="../../plugins/node-waves/waves.js"></script>
+
+    <!-- Validation Plugin Js -->
+    <script src="../../plugins/jquery-validation/jquery.validate.js"></script>
+
+    <!-- SweetAlert Plugin Js -->
+    <script src="../../plugins/sweetalert/sweetalert.min.js"></script>
+
+
+    <!-- Custom Js -->
+    <script src="../../js/admin.js"></script>
+    <script src="../../js/pages/examples/sign-in.js"></script>
+    <script src="../controller.js"></script>
+<script>
+    function userLog(){
+
+        $("#frm_signIn").validate({
+
+            debug : true,
+            rules : {
+                'txt_user_pw' : { password : true },
+                'date_start' : { date_min : '.date-end' },
+                'date_end' : { date_max : '.date-start' }
+            },
+
+            submitHandler : function(form) {
+                // code for AJAX starts
+
+                formData = new FormData($("#frm_signIn")[0]);
+                // var ajax_url = "user-controller.php?ftype=add_user";
+                var ajax_url = "log_process.php?ftype=log_user";
+
+                $.ajax({
+                    url : ajax_url,
+                    type : "POST",
+                    data : formData,
+                    contentType : false,
+                    cache : false,
+                    processData : false,
+                    dataType : "json",
+                    success : function(data) {
+                        //console.log(data.data.page);
+                        if (data.status == true) {
+                            console.log("in true");
+                            swal({
+                                title : data.title,
+                                text : "You are verified",
+                                type : "success"
+                            }, function() {
+                                window.location.href= data.data.page;
+                            });
+
+                        }
+                        if (data.status == false) {
+                            console.log("in false");
+                            swal(data.title, data.body, "error");
+                        }
+                    },
+                    error : function(data) {
+                        console.log(data);
+                        alert('Unable To Save Style');
+                    }
+                });
+
+                // #END! AJAX
+            }
+        });
+
+
+    }
+
+</script>
+</body>
+
+</html>

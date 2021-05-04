@@ -1,0 +1,46 @@
+body {
+
+				background-color: #e0e0d1;
+			}
+			.left-panel {
+				border-radius: 25px;
+				background-color: #FFFFFF;
+			}
+			.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+				color: #fff;
+				background-color: #e40f0f;
+			}
+			.navbar-inverse {
+				background-color: #0a3151;
+				border-color: #ec1a1a;
+			}
+			.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+				color: #ef0000;
+				background-color: transparent;
+			}
+			.navbar-brand {
+    float: left;
+    height: 50px;
+     padding: 0px 0px; 
+    font-size: 18px;
+    line-height: 20px;
+}
+			/* make sidebar nav vertical */
+			@media (min-width: 768px) {
+				.sidebar-nav .navbar .navbar-collapse {
+					padding: 0;
+					max-height: none;
+				}
+				.sidebar-nav .navbar ul {
+					float: none;
+					display: block;
+				}
+				.sidebar-nav .navbar li {
+					float: none;
+					display: block;
+				}
+				.sidebar-nav .navbar li a {
+					padding-top: 12px;
+					padding-bottom: 12px;
+				}
+			}
